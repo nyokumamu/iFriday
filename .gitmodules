@@ -1,0 +1,3 @@
+[submodule "iFriday/Submodules/opencv"]
+	path = iFriday/Submodules/opencv
+	url = git@tanjoin:Itseez/opencv.git
