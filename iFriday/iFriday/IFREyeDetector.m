@@ -100,7 +100,34 @@
   cv::Mat gray = [self cvMatGrayFromUIImage:image];
   
   // TODO: ここに目を変換する処理を追加する
+  std::string nested_cascadeName = "iFriday/Data/haarcascades/haarcascade_eye.xml";
+  cv::CascadeClassifier nested_cascade;
+  if(!nested_cascalde.load(nested_cascadeName)) {
+    return image;
+  }
+  
+  std::vector nestedObjects;
+  // 目の検出
+  // 画像、出力矩形、縮小スケール、最低矩形数、（フラグ）、最小矩形
+  nested_cascade.detectMultiScale(gray,
+                                  nestedObjects,
+                                  1.1,
+                                  3,
+                                  CV_HAAR_SCALE_IMAGE,
+                                  cv::Size(10, 10));
+  // 目の位置の表示
+  for (std::vector::const_iterator itr = nestedObjects.begin();
+       itr != nestedOjbects.end(); ++nr) {
+    cv::rectangle(src,
+                  cv::Point(itr->x, itr->y),
+                  cv::Point(itr->x + itr->width, itr->y + itr->height),
+                  cv::Scalar(255, 0, 0),
+                  3,
+                  4);
+  }
   
   UIImage uiimage = [self UIImageFromCVMat:src];
+  
+  return uiimage;
 }
 #endif
