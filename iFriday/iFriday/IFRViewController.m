@@ -51,16 +51,29 @@
         // フォトライブラリを開く
         [self presentViewController:imagePicker animated:YES completion:^{
             // 開いたタイミングで呼ばれる
-            NSlog(@"(1)フォトライブラリが開いた");
+            NSLog(@"(1)フォトライブラリが開いた");
         }];
     }
 }
 
 // 写真撮影後orサムネイル選択後に呼ばれる処理
-- (void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithinfo:(NSDictionary *)into
+- (void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithinfo:(NSDictionary *)info
 {
-    // オリジナル画像
-    UIImage* originalImage = (UIImage *)[info objectForKey:UIImagePicker]
+    UIImage* originalImage = (UIImage *)[info objectForKey:UIImagePickerControllerOriginalImage];
+    UIImage* editedImage   = (UIImage *)[info objectForKey:UIImagePickerControllerEditedImage];
+    
+    UIImage* savedImage;
+    if (editedImage) {
+        savedImage = editedImage;
+    } else {
+        savedImage = originalImage;
+    }
+    
+    _imageView.image = savedImage;
+    [self dismissViewControllerAnimated:YES completion:^{
+        
+    }];
 }
+
 
 @end
