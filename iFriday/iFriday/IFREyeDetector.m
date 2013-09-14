@@ -126,7 +126,7 @@
                   4);
   }
   
-  UIImage uiimage = [self UIImageFromCVMat:src];
+  UIImage *uiimage = [self UIImageFromCVMat:src];
   
   return uiimage;
 }
