@@ -1,9 +1,9 @@
-### ¼ÂÁõ¤Î»²¹Í¤Ë¤·¤¿¥µ¥¤¥È
+### ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½Í¤Ë¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
- - ¸ø¼°¤Î¥«¥á¥é¼ÂÁõ¼ê½ç½ñ
-https://developer.apple.com/jp/devcenter/ios/library/documentation/CameraAndPhotoLib_TopicsForIOS.pdf
+ - ï¿½ï¿½ï¿½ï¿½ï¿½Î¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+   https://developer.apple.com/jp/devcenter/ios/library/documentation/CameraAndPhotoLib_TopicsForIOS.pdf
 
-- iPhone¥«¥á¥é¥¢¥×¥ê³«È¯ÆþÌç
-http://www.slideshare.net/takatronix/i-os-21935120
+- iPhoneï¿½ï¿½ï¿½ï¿½ï¿½é¥¢ï¿½×¥ê³«È¯ï¿½ï¿½ï¿½ï¿½
+   http://www.slideshare.net/takatronix/i-os-21935120
 
 
