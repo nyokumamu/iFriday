@@ -34,10 +34,10 @@
      UIImagePickerControllerSourceTypePhotoLibrary  を
      UIImagePickerControllerSourceTypeCamera        に変更
     */
-    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary])
+    if( [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary] )
     {
         // UIImagePickerControllerを作成し初期化 new = alloc + init;
-        UIImagePickerController* imagePicker = [UIImagePickerController new];
+        UIImagePickerController* imagePicker = [ UIImagePickerController new ];
         
         // カメラを開く場合　sourceType = UIImagePickerControllerSourceTypeCamera;
         imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
@@ -49,36 +49,18 @@
         imagePicker.delegate = self;
         
         // フォトライブラリを開く
-        [self presentViewController:imagePicker animated:YES
-                         completion:^{
-                             // 開いたタイミングで呼ばれる
-                            NSLog(@"(1)フォトライブラリが開いた");
-                         }];
+        [self presentViewController:imagePicker animated:YES completion:^{
+            // 開いたタイミングで呼ばれる
+            NSlog(@"(1)フォトライブラリが開いた");
+        }];
     }
 }
 
 // 写真撮影後orサムネイル選択後に呼ばれる処理
--(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithinfo:(NSDictionary *)info
+- (void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithinfo:(NSDictionary *)into
 {
     // オリジナル画像
-    UIImage* originalImage = (UIImage *)[info objectForKey:UIImagePickerControllerOriginalImage];
-    
-    // 編集画像
-    UIImage* editedImage = (UIImage *)[info objectForKey:UIImagePickerControllerEditedImage];
-    
-    UIImage* savedImage;
-    if (editedImage) {
-        savedImage = editedImage;
-    } else {
-        savedImage = originalImage;
-    }
-    
-    // 選択された画像を表示
-    _imageView.image = savedImage;
-    [self dismissViewControllerAnimated:YES completion:^{
-        
-    }];
+    UIImage* originalImage = (UIImage *)[info objectForKey:UIImagePicker]
 }
-
 
 @end
