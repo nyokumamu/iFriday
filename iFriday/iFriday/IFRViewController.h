@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface IFRViewController : UIViewController
+@interface IFRViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
+@property IBOutlet UIImageView* imageView;
 @end
