@@ -1,4 +1,4 @@
-### 実装の参考にしたサイト
+### 参照
 
  - 公式のカメラ実装手順書 
 https://developer.apple.com/jp/devcenter/ios/library/documentation/CameraAndPhotoLib_TopicsForIOS.pdf
