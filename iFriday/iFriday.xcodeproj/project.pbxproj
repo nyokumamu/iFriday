@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		43EEA37317E4579000ECBA49 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43EEA37217E4579000ECBA49 /* opencv2.framework */; };
+		43EEA37717E4582200ECBA49 /* IFREyeDetector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43EEA37617E4582200ECBA49 /* IFREyeDetector.cpp */; };
 		7DFFFC3017E42924003A3E92 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DFFFC2F17E42924003A3E92 /* UIKit.framework */; };
 		7DFFFC3217E42924003A3E92 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DFFFC3117E42924003A3E92 /* Foundation.framework */; };
 		7DFFFC3417E42924003A3E92 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DFFFC3317E42924003A3E92 /* CoreGraphics.framework */; };
@@ -21,6 +23,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		43EEA37217E4579000ECBA49 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
+		43EEA37517E4580700ECBA49 /* IFREyeDetector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IFREyeDetector.h; sourceTree = "<group>"; };
+		43EEA37617E4582200ECBA49 /* IFREyeDetector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IFREyeDetector.cpp; sourceTree = "<group>"; };
 		7DFFFC2B17E42924003A3E92 /* iFriday.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iFriday.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DFFFC2F17E42924003A3E92 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		7DFFFC3117E42924003A3E92 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -44,6 +49,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43EEA37317E4579000ECBA49 /* opencv2.framework in Frameworks */,
 				7DFFFC3017E42924003A3E92 /* UIKit.framework in Frameworks */,
 				7DFFFC3217E42924003A3E92 /* Foundation.framework in Frameworks */,
 				7DFFFC3417E42924003A3E92 /* CoreGraphics.framework in Frameworks */,
@@ -73,6 +79,7 @@
 		7DFFFC2E17E42924003A3E92 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				43EEA37217E4579000ECBA49 /* opencv2.framework */,
 				7DFFFC2F17E42924003A3E92 /* UIKit.framework */,
 				7DFFFC3117E42924003A3E92 /* Foundation.framework */,
 				7DFFFC3317E42924003A3E92 /* CoreGraphics.framework */,
@@ -89,6 +96,8 @@
 				7DFFFC4817E42924003A3E92 /* IFRViewController.m */,
 				7DFFFC4A17E42924003A3E92 /* IFRViewController.xib */,
 				7DFFFC3617E42924003A3E92 /* Supporting Files */,
+				43EEA37517E4580700ECBA49 /* IFREyeDetector.h */,
+				43EEA37617E4582200ECBA49 /* IFREyeDetector.cpp */,
 			);
 			path = iFriday;
 			sourceTree = "<group>";
@@ -177,6 +186,7 @@
 				7DFFFC3C17E42924003A3E92 /* main.m in Sources */,
 				7DFFFC4017E42924003A3E92 /* IFRAppDelegate.m in Sources */,
 				7DFFFC4917E42924003A3E92 /* IFRViewController.m in Sources */,
+				43EEA37717E4582200ECBA49 /* IFREyeDetector.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -255,6 +265,10 @@
 		7DFFFC5017E42924003A3E92 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iFriday/iFriday-Prefix.pch";
 				INFOPLIST_FILE = "iFriday/iFriday-Info.plist";
@@ -266,6 +280,10 @@
 		7DFFFC5117E42924003A3E92 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iFriday/iFriday-Prefix.pch";
 				INFOPLIST_FILE = "iFriday/iFriday-Info.plist";
@@ -293,6 +311,7 @@
 				7DFFFC5117E42924003A3E92 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

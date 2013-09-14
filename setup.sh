@@ -1,1 +1,1 @@
-./scripts/set_up.sh
+git submodule update --init --recursive
