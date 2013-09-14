@@ -3,6 +3,6 @@ iFriday
 
 camera application
 
-## test
+## ‚Í‚¶‚ß‚É
 
-
+`./setup.sh`
