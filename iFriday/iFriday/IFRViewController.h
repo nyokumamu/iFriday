@@ -11,4 +11,6 @@
 @interface IFRViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property IBOutlet UIImageView* imageView;
+@property IBOutlet UIBarButtonItem *importButton;
+
 @end
