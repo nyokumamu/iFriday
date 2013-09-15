@@ -57,7 +57,7 @@
 }
 
 // 写真撮影後orサムネイル選択後に呼ばれる処理
-- (void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithinfo:(NSDictionary *)info
+- (void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     UIImage* originalImage = (UIImage *)[info objectForKey:UIImagePickerControllerOriginalImage];
     UIImage* editedImage   = (UIImage *)[info objectForKey:UIImagePickerControllerEditedImage];
