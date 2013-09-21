@@ -25,25 +25,27 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+// フォトライブラリに保存
 - (IBAction)savePhotoLibrary:(id)sender {
   if (saveImage != nil) {
-    NSTimeInterval time_stamp = [[NSDate date] timeIntervalSince1970];
-    NSNumber *time_stamp_obj = [NSNumber numberWithDouble:time_stamp];
-    NSString *image_path = [NSHomeDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"Documents/%@.png",time_stamp_obj]];
     NSData *data = UIImagePNGRepresentation(saveImage);
-    if([data writeToFile:image_path atomically:YES]) {
-      NSLog(@"OK");
-      UIAlertView *alert = [[UIAlertView alloc]
-                            initWithTitle:@"" message:image_path delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-      [alert show];
-    } else {
-      NSLog(@"Error");
-      UIAlertView *alert = [[UIAlertView alloc]
-                            initWithTitle:@"" message:@"Error" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-      [alert show];
-    }
+    UIImage *png = [UIImage imageWithData:data];
+    UIImageWriteToSavedPhotosAlbum(png, self, @selector(savingImageIsFinished:didFinishSavingWithError:contextInfo:), nil);
   }
   saveImage = nil;
+}
+
+- (void) savingImageIsFinished:(UIImage *)_image didFinishSavingWithError:(NSError *)_error contextInfo:(void *)_contextInfo {
+  if (_error) {
+    UIAlertView *alert = [[UIAlertView alloc]
+    initWithTitle:@"" message:@"Error" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alert show];
+  } else {
+    UIAlertView *alert = [[UIAlertView alloc]
+    initWithTitle:@"" message:@"Save" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alert show];
+  }
 }
 
 
@@ -72,7 +74,6 @@
         // フォトライブラリを開く
         [self presentViewController:imagePicker animated:YES completion:^{
             // 開いたタイミングで呼ばれる
-            NSLog(@"(1)フォトライブラリが開いた");
         }];
     }
 }
