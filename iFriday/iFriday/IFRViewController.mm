@@ -167,6 +167,7 @@
                                   CV_HAAR_SCALE_IMAGE,
                                   cv::Size(10, 10));
   // 目の位置の表示
+    /*
   for (std::vector<cv::Rect>::const_iterator itr = nestedObjects.begin();
        itr != nestedObjects.end(); ++itr) {
     cv::rectangle(src,
@@ -176,6 +177,30 @@
                   3,
                   4);
   }
+     */
+     // 目の位置の表示
+     for (std::vector<cv::Rect>::const_iterator itr = nestedObjects.begin(); itr != nestedObjects.end(); ++itr) {
+         
+         cv::Point pt1 = cv::Point(itr->x + itr->size().width/2, itr->y + itr->size().height/2);
+         itr++;
+         cv::Point pt2 = cv::Point(itr->x + itr->size().width/2, itr->y + itr->size().height/2);
+
+         // 傾きを取得
+         float diff_height = pt2.y - pt1.y;
+         float diff_width  = pt2.x - pt1.x;
+         float gradient = diff_height / diff_width;
+         int offset_width = itr->size().width/2;
+         
+         // pt1の立て幅とpt2の立て幅の平均
+
+         pt1.x -= offset_width;
+         pt1.y -= offset_width * gradient;
+         pt2.x += offset_width;
+         pt2.y += offset_width * gradient;
+         cv::line(src, pt1, pt2, cv::Scalar(0,0,0),offset_width);
+
+     }
+
   
   UIImage *uiimage = [self UIImageFromCVMat:src];
   
