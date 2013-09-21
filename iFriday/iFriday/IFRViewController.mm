@@ -25,6 +25,27 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+- (IBAction)savePhotoLibrary:(id)sender {
+  if (saveImage != nil) {
+    NSTimeInterval time_stamp = [[NSDate date] timeIntervalSince1970];
+    NSNumber *time_stamp_obj = [NSNumber numberWithDouble:time_stamp];
+    NSString *image_path = [NSHomeDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"Documents/%@.png",time_stamp_obj]];
+    NSData *data = UIImagePNGRepresentation(saveImage);
+    if([data writeToFile:image_path atomically:YES]) {
+      NSLog(@"OK");
+      UIAlertView *alert = [[UIAlertView alloc]
+                            initWithTitle:@"" message:image_path delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+      [alert show];
+    } else {
+      NSLog(@"Error");
+      UIAlertView *alert = [[UIAlertView alloc]
+                            initWithTitle:@"" message:@"Error" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+      [alert show];
+    }
+  }
+  saveImage = nil;
+}
+
 
 //  フォトライブラリを開く
 - (IBAction)openPhotoLibrary:(id)sender {
@@ -60,20 +81,12 @@
 - (void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     UIImage* originalImage = (UIImage *)[info objectForKey:UIImagePickerControllerOriginalImage];
-    UIImage* editedImage   = (UIImage *)[info objectForKey:UIImagePickerControllerEditedImage];
-    
-    UIImage* savedImage;
-    if (editedImage) {
-        savedImage = editedImage;
-    } else {
-        savedImage = originalImage;
-    }
   
 #ifdef __cplusplus
-  savedImage = [self EyeDetector:savedImage];
+  saveImage = [self EyeDetector:originalImage];
 #endif
   
-    _imageView.image = savedImage;
+    _imageView.image = saveImage;
     [self dismissViewControllerAnimated:YES completion:^{
         
     }];
