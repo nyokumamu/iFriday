@@ -69,13 +69,9 @@
         savedImage = originalImage;
     }
   
-  NSLog(@"1");
 #ifdef __cplusplus
-  NSLog(@"2");
   savedImage = [self EyeDetector:savedImage];
-    NSLog(@"3");
 #endif
-  NSLog(@"4");
   
     _imageView.image = savedImage;
     [self dismissViewControllerAnimated:YES completion:^{
