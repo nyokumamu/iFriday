@@ -183,6 +183,9 @@
          
          cv::Point pt1 = cv::Point(itr->x + itr->size().width/2, itr->y + itr->size().height/2);
          itr++;
+         if (itr == nestedObjects.end()) {
+             break;
+         }
          cv::Point pt2 = cv::Point(itr->x + itr->size().width/2, itr->y + itr->size().height/2);
 
          // 傾きを取得
