@@ -26,6 +26,29 @@
     // Dispose of any resources that can be recreated.
 }
 
+// フォトライブラリに保存
+- (IBAction)savePhotoLibrary:(id)sender {
+  if (saveImage != nil) {
+    NSData *data = UIImagePNGRepresentation(saveImage);
+    UIImage *png = [UIImage imageWithData:data];
+    UIImageWriteToSavedPhotosAlbum(png, self, @selector(savingImageIsFinished:didFinishSavingWithError:contextInfo:), nil);
+  }
+  saveImage = nil;
+}
+
+- (void) savingImageIsFinished:(UIImage *)_image didFinishSavingWithError:(NSError *)_error contextInfo:(void *)_contextInfo {
+  if (_error) {
+    UIAlertView *alert = [[UIAlertView alloc]
+    initWithTitle:@"" message:@"Error" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alert show];
+  } else {
+    UIAlertView *alert = [[UIAlertView alloc]
+    initWithTitle:@"" message:@"Save" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alert show];
+  }
+}
+
+
 //  フォトライブラリを開く
 - (IBAction)openPhotoLibrary:(id)sender {
     /*
@@ -51,7 +74,6 @@
         // フォトライブラリを開く
         [self presentViewController:imagePicker animated:YES completion:^{
             // 開いたタイミングで呼ばれる
-            NSLog(@"(1)フォトライブラリが開いた");
         }];
     }
 }
@@ -60,20 +82,12 @@
 - (void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     UIImage* originalImage = (UIImage *)[info objectForKey:UIImagePickerControllerOriginalImage];
-    UIImage* editedImage   = (UIImage *)[info objectForKey:UIImagePickerControllerEditedImage];
-    
-    UIImage* savedImage;
-    if (editedImage) {
-        savedImage = editedImage;
-    } else {
-        savedImage = originalImage;
-    }
   
 #ifdef __cplusplus
-  savedImage = [self EyeDetector:savedImage];
+  saveImage = [self EyeDetector:originalImage];
 #endif
   
-    _imageView.image = savedImage;
+    _imageView.image = saveImage;
     [self dismissViewControllerAnimated:YES completion:^{
         
     }];

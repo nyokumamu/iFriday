@@ -9,8 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @interface IFRViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+{
+  UIImage *saveImage;
+}
 
 @property IBOutlet UIImageView* imageView;
 @property IBOutlet UIBarButtonItem *importButton;
+@property IBOutlet UIBarButtonItem *saveButton;
 
 @end
