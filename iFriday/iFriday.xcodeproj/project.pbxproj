@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		43EEA37317E4579000ECBA49 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43EEA37217E4579000ECBA49 /* opencv2.framework */; };
-		43EEA37717E4582200ECBA49 /* IFREyeDetector.m in Sources */ = {isa = PBXBuildFile; fileRef = 43EEA37617E4582200ECBA49 /* IFREyeDetector.m */; };
 		43EEA39317E4793B00ECBA49 /* haarcascade_eye.xml in Resources */ = {isa = PBXBuildFile; fileRef = 43EEA37D17E4793B00ECBA49 /* haarcascade_eye.xml */; };
 		43EEA39417E4793B00ECBA49 /* haarcascade_eye_tree_eyeglasses.xml in Resources */ = {isa = PBXBuildFile; fileRef = 43EEA37E17E4793B00ECBA49 /* haarcascade_eye_tree_eyeglasses.xml */; };
 		43EEA39517E4793B00ECBA49 /* haarcascade_frontalface_alt.xml in Resources */ = {isa = PBXBuildFile; fileRef = 43EEA37F17E4793B00ECBA49 /* haarcascade_frontalface_alt.xml */; };
@@ -40,14 +39,12 @@
 		7DFFFC4217E42924003A3E92 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DFFFC4117E42924003A3E92 /* Default.png */; };
 		7DFFFC4417E42924003A3E92 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DFFFC4317E42924003A3E92 /* Default@2x.png */; };
 		7DFFFC4617E42924003A3E92 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DFFFC4517E42924003A3E92 /* Default-568h@2x.png */; };
-		7DFFFC4917E42924003A3E92 /* IFRViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DFFFC4817E42924003A3E92 /* IFRViewController.m */; };
+		7DFFFC4917E42924003A3E92 /* IFRViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7DFFFC4817E42924003A3E92 /* IFRViewController.mm */; };
 		7DFFFC4C17E42924003A3E92 /* IFRViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DFFFC4A17E42924003A3E92 /* IFRViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		43EEA37217E4579000ECBA49 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
-		43EEA37517E4580700ECBA49 /* IFREyeDetector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IFREyeDetector.h; sourceTree = "<group>"; };
-		43EEA37617E4582200ECBA49 /* IFREyeDetector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IFREyeDetector.m; sourceTree = "<group>"; };
 		43EEA37D17E4793B00ECBA49 /* haarcascade_eye.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = haarcascade_eye.xml; sourceTree = "<group>"; };
 		43EEA37E17E4793B00ECBA49 /* haarcascade_eye_tree_eyeglasses.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = haarcascade_eye_tree_eyeglasses.xml; sourceTree = "<group>"; };
 		43EEA37F17E4793B00ECBA49 /* haarcascade_frontalface_alt.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = haarcascade_frontalface_alt.xml; sourceTree = "<group>"; };
@@ -84,7 +81,7 @@
 		7DFFFC4317E42924003A3E92 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		7DFFFC4517E42924003A3E92 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		7DFFFC4717E42924003A3E92 /* IFRViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IFRViewController.h; sourceTree = "<group>"; };
-		7DFFFC4817E42924003A3E92 /* IFRViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IFRViewController.m; sourceTree = "<group>"; };
+		7DFFFC4817E42924003A3E92 /* IFRViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = IFRViewController.mm; sourceTree = "<group>"; };
 		7DFFFC4B17E42924003A3E92 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/IFRViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -175,10 +172,8 @@
 				43EEA37B17E4787C00ECBA49 /* Data */,
 				7DFFFC3E17E42924003A3E92 /* IFRAppDelegate.h */,
 				7DFFFC3F17E42924003A3E92 /* IFRAppDelegate.m */,
-				43EEA37517E4580700ECBA49 /* IFREyeDetector.h */,
-				43EEA37617E4582200ECBA49 /* IFREyeDetector.m */,
 				7DFFFC4717E42924003A3E92 /* IFRViewController.h */,
-				7DFFFC4817E42924003A3E92 /* IFRViewController.m */,
+				7DFFFC4817E42924003A3E92 /* IFRViewController.mm */,
 				7DFFFC4A17E42924003A3E92 /* IFRViewController.xib */,
 				7DFFFC3617E42924003A3E92 /* Supporting Files */,
 			);
@@ -290,8 +285,7 @@
 			files = (
 				7DFFFC3C17E42924003A3E92 /* main.m in Sources */,
 				7DFFFC4017E42924003A3E92 /* IFRAppDelegate.m in Sources */,
-				7DFFFC4917E42924003A3E92 /* IFRViewController.m in Sources */,
-				43EEA37717E4582200ECBA49 /* IFREyeDetector.m in Sources */,
+				7DFFFC4917E42924003A3E92 /* IFRViewController.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

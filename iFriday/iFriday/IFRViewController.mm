@@ -1,15 +1,91 @@
 //
-//  IFREyeDetector.cpp
+//  IFRViewController.m
 //  iFriday
 //
-//  Created by tanjo yuuki on 2013/09/14.
+//  Created by Yosuke Hiraoka on 13/09/14.
 //  Copyright (c) 2013年 Yosuke Hiraoka, Tanjo Yuki. All rights reserved.
 //
 
-#include "IFREyeDetector.h"
+#import "IFRViewController.h"
 
+@interface IFRViewController ()
+
+@end
+
+@implementation IFRViewController
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+	// Do any additional setup after loading the view, typically from a nib.
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+//  フォトライブラリを開く
+- (IBAction)openPhotoLibrary:(id)sender {
+    /*
+     フォトライブラリが使えるかチェック
+     カメラを開く場合
+     UIImagePickerControllerSourceTypePhotoLibrary  を
+     UIImagePickerControllerSourceTypeCamera        に変更
+    */
+    if( [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary] )
+    {
+        // UIImagePickerControllerを作成し初期化 new = alloc + init;
+        UIImagePickerController* imagePicker = [ UIImagePickerController new ];
+        
+        // カメラを開く場合　sourceType = UIImagePickerControllerSourceTypeCamera;
+        imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        
+        // 編集可能にする場合はYES
+        imagePicker.allowsEditing = YES;
+        
+        // 自分への通知設定
+        imagePicker.delegate = self;
+        
+        // フォトライブラリを開く
+        [self presentViewController:imagePicker animated:YES completion:^{
+            // 開いたタイミングで呼ばれる
+            NSLog(@"(1)フォトライブラリが開いた");
+        }];
+    }
+}
+
+// 写真撮影後orサムネイル選択後に呼ばれる処理
+- (void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    UIImage* originalImage = (UIImage *)[info objectForKey:UIImagePickerControllerOriginalImage];
+    UIImage* editedImage   = (UIImage *)[info objectForKey:UIImagePickerControllerEditedImage];
+    
+    UIImage* savedImage;
+    if (editedImage) {
+        savedImage = editedImage;
+    } else {
+        savedImage = originalImage;
+    }
+  
+  NSLog(@"1");
 #ifdef __cplusplus
-+ (cv::Mat)cvMatFromUIImage:(UIImage *)image
+  NSLog(@"2");
+  savedImage = [self EyeDetector:savedImage];
+    NSLog(@"3");
+#endif
+  NSLog(@"4");
+  
+    _imageView.image = savedImage;
+    [self dismissViewControllerAnimated:YES completion:^{
+        
+    }];
+}
+
+// UIImage -> cv::Mat
+#ifdef __cplusplus
+- (cv::Mat)cvMatFromUIImage:(UIImage *)image
 {
   CGColorSpaceRef colorSpace = CGImageGetColorSpace(image.CGImage);
   CGFloat cols = image.size.width;
@@ -33,31 +109,7 @@
   return cvMat;
 }
 
-+ (cv::Mat)cvMatGrayFromUIImage:(UIImage *)image
-{
-  CGColorSpaceRef colorSpace = CGImageGetColorSpace(image.CGImage);
-  CGFloat cols = image.size.width;
-  CGFloat rows = image.size.height;
-  
-  cv::Mat cvMat(rows, cols, CV_8UC1); // 8 bits per component, 1 channels
-  
-  CGContextRef contextRef = CGBitmapContextCreate(cvMat.data,                 // Pointer to data
-                                                  cols,                       // Width of bitmap
-                                                  rows,                       // Height of bitmap
-                                                  8,                          // Bits per component
-                                                  cvMat.step[0],              // Bytes per row
-                                                  colorSpace,                 // Colorspace
-                                                  kCGImageAlphaNoneSkipLast |
-                                                  kCGBitmapByteOrderDefault); // Bitmap info flags
-  
-  CGContextDrawImage(contextRef, CGRectMake(0, 0, cols, rows), image.CGImage);
-  CGContextRelease(contextRef);
-  CGColorSpaceRelease(colorSpace);
-  
-  return cvMat;
-}
-
-+ (UIImage *)UIImageFromCVMat:(cv::Mat)cvMat
+- (UIImage *)UIImageFromCVMat:(cv::Mat)cvMat
 {
   NSData *data = [NSData dataWithBytes:cvMat.data length:cvMat.elemSize()*cvMat.total()];
   CGColorSpaceRef colorSpace;
@@ -94,30 +146,33 @@
   return finalImage;
 }
 
-+ (UIIMage *)EyeDetector:(UIIMage *)image {
+- (UIImage *)EyeDetector:(UIImage *)image {
   
   cv::Mat src = [self cvMatFromUIImage:image];
-  cv::Mat gray = [self cvMatGrayFromUIImage:image];
-  
+  cv::Mat gray;
+  cv::cvtColor(src, gray, CV_BGR2GRAY);
   // TODO: ここに目を変換する処理を追加する
-  std::string nested_cascadeName = "iFriday/Data/haarcascades/haarcascade_eye.xml";
+  NSString* resDir = [[NSBundle mainBundle] resourcePath];
+  const char *cascade_name = "haarcascade_eye.xml";
+  char cascade_path[PATH_MAX];
+  sprintf(cascade_path, "%s/%s", [resDir cStringUsingEncoding:NSASCIIStringEncoding], cascade_name );
   cv::CascadeClassifier nested_cascade;
-  if(!nested_cascalde.load(nested_cascadeName)) {
+  if(!nested_cascade.load(cascade_path)) {
     return image;
   }
   
-  std::vector nestedObjects;
+  std::vector<cv::Rect> nestedObjects;
   // 目の検出
   // 画像、出力矩形、縮小スケール、最低矩形数、（フラグ）、最小矩形
-  nested_cascade.detectMultiScale(gray,
+  nested_cascade.detectMultiScale(src,
                                   nestedObjects,
                                   1.1,
                                   3,
                                   CV_HAAR_SCALE_IMAGE,
                                   cv::Size(10, 10));
   // 目の位置の表示
-  for (std::vector::const_iterator itr = nestedObjects.begin();
-       itr != nestedOjbects.end(); ++nr) {
+  for (std::vector<cv::Rect>::const_iterator itr = nestedObjects.begin();
+       itr != nestedObjects.end(); ++itr) {
     cv::rectangle(src,
                   cv::Point(itr->x, itr->y),
                   cv::Point(itr->x + itr->width, itr->y + itr->height),
@@ -130,4 +185,7 @@
   
   return uiimage;
 }
+
 #endif
+
+@end
