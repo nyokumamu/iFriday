@@ -93,6 +93,8 @@
     }];
 }
 
+#pragma mark - OpenCV methods
+
 // UIImage -> cv::Mat
 #ifdef __cplusplus
 - (cv::Mat)cvMatFromUIImage:(UIImage *)image
