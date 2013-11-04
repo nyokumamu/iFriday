@@ -10,6 +10,7 @@
 		43E8DDA918277B3B00BF2B0A /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43E8DDA818277B3B00BF2B0A /* Social.framework */; };
 		43E8DDC2182787E400BF2B0A /* IFRSaveImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E8DDC0182787E400BF2B0A /* IFRSaveImageViewController.m */; };
 		43E8DDC3182787E400BF2B0A /* IFRSaveImageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43E8DDC1182787E400BF2B0A /* IFRSaveImageViewController.xib */; };
+		43E8DDC51827A25B00BF2B0A /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43E8DDC41827A25B00BF2B0A /* AVFoundation.framework */; };
 		43EEA37317E4579000ECBA49 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43EEA37217E4579000ECBA49 /* opencv2.framework */; };
 		43EEA39317E4793B00ECBA49 /* haarcascade_eye.xml in Resources */ = {isa = PBXBuildFile; fileRef = 43EEA37D17E4793B00ECBA49 /* haarcascade_eye.xml */; };
 		43EEA39417E4793B00ECBA49 /* haarcascade_eye_tree_eyeglasses.xml in Resources */ = {isa = PBXBuildFile; fileRef = 43EEA37E17E4793B00ECBA49 /* haarcascade_eye_tree_eyeglasses.xml */; };
@@ -51,6 +52,7 @@
 		43E8DDBF182787E400BF2B0A /* IFRSaveImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IFRSaveImageViewController.h; sourceTree = "<group>"; };
 		43E8DDC0182787E400BF2B0A /* IFRSaveImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IFRSaveImageViewController.m; sourceTree = "<group>"; };
 		43E8DDC1182787E400BF2B0A /* IFRSaveImageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IFRSaveImageViewController.xib; sourceTree = "<group>"; };
+		43E8DDC41827A25B00BF2B0A /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		43EEA37217E4579000ECBA49 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
 		43EEA37D17E4793B00ECBA49 /* haarcascade_eye.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = haarcascade_eye.xml; sourceTree = "<group>"; };
 		43EEA37E17E4793B00ECBA49 /* haarcascade_eye_tree_eyeglasses.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = haarcascade_eye_tree_eyeglasses.xml; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43E8DDC51827A25B00BF2B0A /* AVFoundation.framework in Frameworks */,
 				43E8DDA918277B3B00BF2B0A /* Social.framework in Frameworks */,
 				43EEA37317E4579000ECBA49 /* opencv2.framework in Frameworks */,
 				7DFFFC3017E42924003A3E92 /* UIKit.framework in Frameworks */,
@@ -166,6 +169,7 @@
 		7DFFFC2E17E42924003A3E92 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				43E8DDC41827A25B00BF2B0A /* AVFoundation.framework */,
 				43E8DDA818277B3B00BF2B0A /* Social.framework */,
 				43EEA37217E4579000ECBA49 /* opencv2.framework */,
 				7DFFFC2F17E42924003A3E92 /* UIKit.framework */,

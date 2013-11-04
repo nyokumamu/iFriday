@@ -7,8 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IFRViewController">
             <connections>
-                <outlet property="imageView" destination="24" id="70"/>
-                <outlet property="saveButton" destination="66" id="75"/>
+                <outlet property="previewView" destination="yxS-f4-yPK" id="NhM-i9-dxh"/>
                 <outlet property="view" destination="6" id="7"/>
             </connections>
         </placeholder>
@@ -17,14 +16,29 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="24">
-                    <rect key="frame" x="-16" y="-6" width="353" height="530"/>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yxS-f4-yPK">
+                    <rect key="frame" x="-0.5" y="0.0" width="320" height="568"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="353" id="34"/>
-                        <constraint firstAttribute="height" constant="517" id="55"/>
-                    </constraints>
-                </imageView>
+                    <subviews>
+                        <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="56">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                            <items>
+                                <barButtonItem title="ライト" id="57">
+                                    <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </barButtonItem>
+                                <barButtonItem style="plain" systemItem="flexibleSpace" id="67">
+                                    <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
+                                </barButtonItem>
+                                <barButtonItem title="切替" id="66">
+                                    <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </barButtonItem>
+                            </items>
+                            <color key="tintColor" white="0.75" alpha="0.0" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        </toolbar>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                </view>
                 <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="41">
                     <rect key="frame" x="0.0" y="524" width="320" height="44"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
@@ -35,40 +49,20 @@
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="53"/>
-                        <barButtonItem systemItem="camera" id="42"/>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="54"/>
-                    </items>
-                </toolbar>
-                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="56">
-                    <rect key="frame" x="0.0" y="-6" width="320" height="44"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                    <items>
-                        <barButtonItem title="Lite" id="57">
-                            <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                        </barButtonItem>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="67">
-                            <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
-                        </barButtonItem>
-                        <barButtonItem systemItem="save" id="66">
-                            <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <barButtonItem systemItem="camera" id="42">
                             <connections>
-                                <action selector="savePhotoLibrary:" destination="-1" id="76"/>
+                                <action selector="takePhoto:" destination="-1" id="Q2D-sq-8dW"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="54"/>
                     </items>
-                    <color key="tintColor" white="0.75" alpha="0.0" colorSpace="custom" customColorSpace="calibratedWhite"/>
                 </toolbar>
             </subviews>
             <color key="backgroundColor" white="0.75" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="24" firstAttribute="top" secondItem="6" secondAttribute="top" constant="-6" id="37"/>
                 <constraint firstItem="41" firstAttribute="leading" secondItem="6" secondAttribute="leading" id="45"/>
                 <constraint firstItem="41" firstAttribute="trailing" secondItem="6" secondAttribute="trailing" id="46"/>
                 <constraint firstItem="41" firstAttribute="bottom" secondItem="6" secondAttribute="bottom" id="49"/>
-                <constraint firstItem="56" firstAttribute="trailing" secondItem="6" secondAttribute="trailing" id="58"/>
-                <constraint firstItem="56" firstAttribute="leading" secondItem="6" secondAttribute="leading" id="59"/>
-                <constraint firstItem="56" firstAttribute="centerX" secondItem="24" secondAttribute="centerX" id="60"/>
-                <constraint firstItem="56" firstAttribute="top" secondItem="24" secondAttribute="top" id="61"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
