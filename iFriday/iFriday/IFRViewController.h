@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AVFoundation/AVFoundation.h>
 
-@interface IFRViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface IFRViewController : UIViewController <UIImagePickerControllerDelegate,
+                                                 UINavigationControllerDelegate>
 {
   UIImage *saveImage;
 }

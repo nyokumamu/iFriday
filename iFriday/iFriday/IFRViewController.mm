@@ -9,15 +9,75 @@
 #import "IFRViewController.h"
 
 @interface IFRViewController ()
-
+@property (strong, nonatomic) AVCaptureDeviceInput *videoInput;
+@property (strong, nonatomic) AVCaptureStillImageOutput *stillImageOutput;
+@property (strong, nonatomic) AVCaptureSession *session;
+@property (weak, nonatomic) IBOutlet UIView *previewView;
 @end
 
 @implementation IFRViewController
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+  [super viewDidLoad];
+  [self setupAVCapture];
+}
+
+- (void) setupAVCapture
+{
+  NSError *error = nil;
+  // 入力と出力からキャプチャーセッションを作成
+  _session = [[AVCaptureSession alloc] init];
+  // 正面に配置されているカメラを取得
+  AVCaptureDevice *camera = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+  // カメラからの入力を作成し、セッションに追加
+  _videoInput = [[AVCaptureDeviceInput alloc] initWithDevice:camera error:&error];
+  
+  if (error) {
+    return;
+  }
+  
+  [_session addInput:_videoInput];
+  
+  // 画像への出力を作成し、セッションに追加
+  _stillImageOutput = [[AVCaptureStillImageOutput alloc] init];
+  [_session addOutput:_stillImageOutput];
+  
+  // キャプチャーセッションから入力のプレビュー表示を作成
+  AVCaptureVideoPreviewLayer *captureVideoPreviewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:_session];
+  captureVideoPreviewLayer.frame = self.view.bounds;
+  captureVideoPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
+  
+  // レイヤーをViewに設定
+  CALayer *previewLayer = _previewView.layer;
+  previewLayer.masksToBounds = YES;
+  [previewLayer addSublayer:captureVideoPreviewLayer];
+  
+  // セッション開始
+  [self.session startRunning];
+}
+
+- (IBAction)takePhoto:(id)sender
+{
+  // ビデオ入力のAVCaptureConnectionを取得
+  AVCaptureConnection *videoConnection = [_stillImageOutput connectionWithMediaType:AVMediaTypeVideo];
+  if (videoConnection == nil) {
+    return;
+  }
+  // ビデオ入力から画像を非同期で取得
+  // ブロックで定義されている処理が呼び出され画像データを引数から取得する
+  [_stillImageOutput captureStillImageAsynchronouslyFromConnection:videoConnection completionHandler:^(CMSampleBufferRef imageDataSampleBuffer, NSError *error) {
+    if (imageDataSampleBuffer == NULL) {
+      return;
+    }
+    // 入力された画像のデータからJPEGフォーマットとしてデータを取得
+    NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
+    // JPEGデータからUIImage作成
+    UIImage *image = [UIImage imageWithData:imageData];
+    // アルバムに画像を保存
+    // TODO:別画面で保存処理は行う
+    // UIImageWriteToSavedPhotosAlbum(image, self, nil, nil);
+  }];
 }
 
 - (void)didReceiveMemoryWarning
@@ -92,6 +152,17 @@
         
     }];
 }
+
+#pragma marks - AVCaptureFileOutputRecordingDelegate methods
+
+// 動画作知恵い終了時に呼び出される
+- (void)captureOutput:(AVCaptureFileOutput *)captureOutput didFinishRecordingToOutputFileAtURL:(NSURL *)outputFileURL
+      fromConnections:(NSArray *)connections error:(NSError *)error
+{
+  
+}
+
+#pragma mark - OpenCV methods
 
 // UIImage -> cv::Mat
 #ifdef __cplusplus
