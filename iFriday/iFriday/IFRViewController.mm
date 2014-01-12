@@ -7,6 +7,7 @@
 //
 
 #import "IFRViewController.h"
+#import "IFRSaveImageViewController.h"
 
 @interface IFRViewController ()
 @property (strong, nonatomic) AVCaptureDeviceInput *videoInput;
@@ -66,7 +67,9 @@
   }
   // ビデオ入力から画像を非同期で取得
   // ブロックで定義されている処理が呼び出され画像データを引数から取得する
-  [_stillImageOutput captureStillImageAsynchronouslyFromConnection:videoConnection completionHandler:^(CMSampleBufferRef imageDataSampleBuffer, NSError *error) {
+  [_stillImageOutput
+   captureStillImageAsynchronouslyFromConnection:videoConnection
+   completionHandler:^(CMSampleBufferRef imageDataSampleBuffer, NSError *error) {
     if (imageDataSampleBuffer == NULL) {
       return;
     }
@@ -75,8 +78,12 @@
     // JPEGデータからUIImage作成
     UIImage *image = [UIImage imageWithData:imageData];
     // アルバムに画像を保存
-    // TODO:別画面で保存処理は行う
-    // UIImageWriteToSavedPhotosAlbum(image, self, nil, nil);
+    IFRSaveImageViewController *saveImageViewController = [[IFRSaveImageViewController alloc]
+                                                           initWithNibName:@"IFRSaveImageViewController" bundle:nil];
+    saveImageViewController.image = image;
+    // 保存画面へ遷移
+    
+    [self.view addSubview:saveImageViewController.self.view];
   }];
 }
 
@@ -89,24 +96,23 @@
 // フォトライブラリに保存
 - (IBAction)savePhotoLibrary:(id)sender {
   if (saveImage != nil) {
-    NSData *data = UIImagePNGRepresentation(saveImage);
-    UIImage *png = [UIImage imageWithData:data];
-    UIImageWriteToSavedPhotosAlbum(png, self, @selector(savingImageIsFinished:didFinishSavingWithError:contextInfo:), nil);
+    IFRSaveImageViewController *saveImageViewController = [[IFRSaveImageViewController alloc] initWithNibName:@"IFRSaveImageViewController" bundle:nil];
+    saveImageViewController.image = saveImage;
+    [self.view addSubview:saveImageViewController.self.view];
   }
-  saveImage = nil;
 }
 
-- (void) savingImageIsFinished:(UIImage *)_image didFinishSavingWithError:(NSError *)_error contextInfo:(void *)_contextInfo {
-  if (_error) {
-    UIAlertView *alert = [[UIAlertView alloc]
-    initWithTitle:@"" message:@"Error" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [alert show];
-  } else {
-    UIAlertView *alert = [[UIAlertView alloc]
-    initWithTitle:@"" message:@"Save" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [alert show];
-  }
-}
+//- (void) savingImageIsFinished:(UIImage *)_image didFinishSavingWithError:(NSError *)_error contextInfo:(void *)_contextInfo {
+//  if (_error) {
+//    UIAlertView *alert = [[UIAlertView alloc]
+//    initWithTitle:@"" message:@"Error" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+//    [alert show];
+//  } else {
+//    UIAlertView *alert = [[UIAlertView alloc]
+//    initWithTitle:@"" message:@"Save" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+//    [alert show];
+//  }
+//}
 
 
 //  フォトライブラリを開く
@@ -149,7 +155,7 @@
   
     _imageView.image = saveImage;
     [self dismissViewControllerAnimated:YES completion:^{
-        
+      [self savePhotoLibrary:nil];
     }];
 }
 

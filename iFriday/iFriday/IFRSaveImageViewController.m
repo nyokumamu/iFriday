@@ -5,6 +5,7 @@
 
 #import <Social/Social.h>
 
+#import "IFRViewController.h"
 #import "IFRSaveImageViewController.h"
 
 const NSInteger kIFRTabBarTagFacebook = 100;
@@ -12,9 +13,12 @@ const NSInteger kIFRTabBarTagTwitter  = 101;
 const NSInteger kIFRTabBarTagSave     = 102;
 
 @interface IFRSaveImageViewController ()
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+- (IBAction)postFacebook:(id)sender;
+- (IBAction)postTwitter:(id)sender;
+- (IBAction)saveImage:(id)sender;
 - (BOOL)postWithService:(NSString *)serviceType;
 - (BOOL)saveImage;
-- (void) savingImageIsFinished:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo;
 @end
 
 @implementation IFRSaveImageViewController
@@ -31,20 +35,32 @@ const NSInteger kIFRTabBarTagSave     = 102;
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  for (int i = 0; i < _tabBar.items.count; i++) {
-    UITabBarItem *item = _tabBar.items[i];
-    switch (i) {
-      case 0:
-        item.tag = kIFRTabBarTagFacebook;
-        break;
-      case 1:
-        item.tag = kIFRTabBarTagTwitter;
-        break;
-      case 2:
-        item.tag = kIFRTabBarTagSave;
-        break;
-    }
+  if (_image) {
+    [_imageView setContentMode:UIViewContentModeCenter];
+    _imageView.image = _image;
+  } else {
+    IFRViewController *viewController = [[IFRViewController alloc] init];
+    [self.view addSubview:viewController.self.view];
   }
+}
+
+- (void)didReceiveMemoryWarning
+{
+  [super didReceiveMemoryWarning];
+}
+
+- (IBAction)postFacebook:(id)sender {
+  [self saveImage];
+  [self postWithService:SLServiceTypeFacebook];
+}
+
+- (IBAction)postTwitter:(id)sender {
+  [self saveImage];
+  [self postWithService:SLServiceTypeTwitter];
+}
+
+- (IBAction)saveImage:(id)sender {
+  [self saveImage];
 }
 
 - (BOOL)postWithService:(NSString *)serviceType
@@ -83,6 +99,7 @@ const NSInteger kIFRTabBarTagSave     = 102;
 - (BOOL)saveImage
 {
   if (_image != nil) {
+    NSLog(@"OK");
     NSData *data = UIImagePNGRepresentation(_image);
     UIImage *png = [UIImage imageWithData:data];
     UIImageWriteToSavedPhotosAlbum(png, self, @selector(savingImageIsFinished:didFinishSavingWithError:contextInfo:), nil);
@@ -91,33 +108,15 @@ const NSInteger kIFRTabBarTagSave     = 102;
   return NO;
 }
 
-- (void) savingImageIsFinished:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
-{
-  if (error) {
+- (void) savingImageIsFinished:(UIImage *)_image didFinishSavingWithError:(NSError *)_error contextInfo:(void *)_contextInfo {
+  if (_error) {
     UIAlertView *alert = [[UIAlertView alloc]
-                          initWithTitle:@"" message:@"保存に失敗しました" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                          initWithTitle:@"" message:@"Error" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [alert show];
   } else {
     UIAlertView *alert = [[UIAlertView alloc]
-                          initWithTitle:@"" message:@"保存しました" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                          initWithTitle:@"" message:@"Save" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [alert show];
-  }
-}
-
-#pragma mark - UITabBar delegate 
-
-- (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item
-{
-  switch (item.tag) {
-    case kIFRTabBarTagFacebook:
-      [self postWithService:SLServiceTypeFacebook];
-      break;
-    case kIFRTabBarTagTwitter:
-      [self postWithService:SLServiceTypeTwitter];
-      break;
-    case kIFRTabBarTagSave:
-      [self saveImage];
-      break;
   }
 }
 

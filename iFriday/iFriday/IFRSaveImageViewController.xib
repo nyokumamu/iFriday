@@ -2,12 +2,12 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment defaultVersion="1536" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3746"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IFRSaveImageViewController">
             <connections>
-                <outlet property="tabBar" destination="O1P-lz-bo9" id="vPd-Bg-da6"/>
+                <outlet property="imageView" destination="RU8-PL-Z53" id="vhj-bH-deZ"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
         </placeholder>
@@ -16,16 +16,33 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tabBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="O1P-lz-bo9">
-                    <rect key="frame" x="0.0" y="519" width="320" height="49"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RU8-PL-Z53">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="524"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                </imageView>
+                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pxz-Yj-f71">
+                    <rect key="frame" x="0.0" y="524" width="320" height="44"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <items>
-                        <tabBarItem title="Facebook" id="oHq-xK-yHV"/>
-                        <tabBarItem title="Twitter" id="Fnf-5p-8Fh"/>
-                        <tabBarItem title="Save" id="dBk-j5-HtL"/>
+                        <barButtonItem title="Facebook" id="mgY-gi-dRF">
+                            <connections>
+                                <action selector="postFacebook:" destination="-1" id="bUG-1A-sdo"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="jyN-5I-dw7"/>
+                        <barButtonItem title="Twitter" id="egE-Ec-hiQ">
+                            <connections>
+                                <action selector="postTwitter:" destination="-1" id="PAF-5F-ic1"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="zrP-I5-q5J"/>
+                        <barButtonItem title="Save" id="L7z-EV-zEK">
+                            <connections>
+                                <action selector="saveImage:" destination="-1" id="6T4-HH-2Hp"/>
+                            </connections>
+                        </barButtonItem>
                     </items>
-                </tabBar>
+                </toolbar>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
