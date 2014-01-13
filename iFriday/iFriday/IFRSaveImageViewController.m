@@ -13,12 +13,15 @@ const NSInteger kIFRTabBarTagTwitter  = 101;
 const NSInteger kIFRTabBarTagSave     = 102;
 
 @interface IFRSaveImageViewController ()
+
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
+
 - (IBAction)postFacebook:(id)sender;
 - (IBAction)postTwitter:(id)sender;
 - (IBAction)saveImage:(id)sender;
 - (BOOL)postWithService:(NSString *)serviceType;
 - (BOOL)saveImage;
+
 @end
 
 @implementation IFRSaveImageViewController
@@ -36,11 +39,7 @@ const NSInteger kIFRTabBarTagSave     = 102;
 {
   [super viewDidLoad];
   if (_image) {
-    [_imageView setContentMode:UIViewContentModeCenter];
-    _imageView.image = _image;
-  } else {
-    IFRViewController *viewController = [[IFRViewController alloc] init];
-    [self.view addSubview:viewController.self.view];
+    [self setImage:_image];
   }
 }
 
@@ -48,6 +47,20 @@ const NSInteger kIFRTabBarTagSave     = 102;
 {
   [super didReceiveMemoryWarning];
 }
+
+- (void)setImage:(UIImage *)image
+{
+  _image = image;
+  if (_image) {
+    [_imageView setContentMode:UIViewContentModeScaleAspectFit];
+    _imageView.image = _image;
+    [_imageView setNeedsDisplay];
+  } else {
+    IFRViewController *viewController = [[IFRViewController alloc] init];
+    [self.view addSubview:viewController.self.view];
+  }
+}
+
 
 - (IBAction)postFacebook:(id)sender {
   [self saveImage];
@@ -98,7 +111,7 @@ const NSInteger kIFRTabBarTagSave     = 102;
 
 - (BOOL)saveImage
 {
-  if (_image != nil) {
+  if (_image) {
     NSLog(@"OK");
     NSData *data = UIImagePNGRepresentation(_image);
     UIImage *png = [UIImage imageWithData:data];

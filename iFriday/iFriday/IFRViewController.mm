@@ -170,8 +170,9 @@
 
 #pragma mark - OpenCV methods
 
-// UIImage -> cv::Mat
 #ifdef __cplusplus
+
+// UIImage -> cv::Mat
 - (cv::Mat)cvMatFromUIImage:(UIImage *)image
 {
   CGColorSpaceRef colorSpace = CGImageGetColorSpace(image.CGImage);
